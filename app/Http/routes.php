@@ -37,6 +37,8 @@ Route::get('tag/usertags/{id}','TagController@usertags');       //得到用户�
 Route::get('tag/delete/{id}','TagController@delete');       //得到用户属于哪个 标签
 
 
+
+
 Route::get('admin/lists','AdminController@lists');
 Route::any('picture','AdminController@picture');
 Route::get('/suijishu','UsersController@rand50');

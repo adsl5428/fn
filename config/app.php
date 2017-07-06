@@ -150,6 +150,7 @@ return [
         Overtrue\LaravelWechat\ServiceProvider::class,
         iscms\Alisms\AlidayuServiceProvider::class,
         Encore\Admin\Providers\AdminServiceProvider::class,
+        Bican\Roles\RolesServiceProvider::class,
         /*
          * Application Service Providers...
          */

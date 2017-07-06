@@ -4,26 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Model\Order;
 use App\Http\Model\Picture;
+use App\Http\Model\User;
 use function asset;
 use function dd;
 use Illuminate\Http\Request;
-
+use Bican\Roles\Models\Permission;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use function var_dump;
+use Bican\Roles\Models\Role;
 
 class LoanController extends Controller
 {
     public function test2()
     {
-        $buttons=
-        [
-            "type" => "view",
-            "name" => "签约产品",
-            "url"  => env('APP_HOST', null)."goods"
-        ];
-        dd($buttons);
+        $user = User::find(1);
+        $user->attachRole($user);
+        return 'done';
     }
     public function edit2(Request $request)
     {
