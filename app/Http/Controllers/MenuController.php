@@ -25,14 +25,75 @@ class MenuController extends Controller
     {
         $buttons = [
             [
-            "type" => "view",
-            "name" => "加入丰纳",
-            "url"  => "http://fnjr.chonghui.net.cn/addpartner"
+                "name" => "我的丰纳",
+                "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "我的信息",
+                        "url"  => env('APP_HOST', null)."myinfo"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "我的订单",
+                        "url"  => env('APP_HOST', null)."myorder"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "更多...",
+                        "url"  => env('APP_HOST', null)."mymore"
+                    ],
+                ],
+
             ],
             [
-                "type" => "view",
-                "name" => "签约产品",
-                "url"  => "http://fnjr.chonghui.net.cn/goods"
+                "name" => "提交订单",
+                "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "房贷",
+                        "url"  => env('APP_HOST', null)."loan/fang"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "车贷",
+                        "url"  => env('APP_HOST', null)."loan/che"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "信贷",
+                        "url"  => env('APP_HOST', null)."loan/xin"
+                    ],
+                ],
+            ],
+            [
+                "name" => "其他",
+                "sub_button" => [
+                    [
+                        "type" => "view",
+                        "name" => "我要投诉",
+                        "url"  => env('APP_HOST', null)."complain"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "在线交谈",
+                        "url"  => env('APP_HOST', null)."chatonline"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "常见问题",
+                        "url"  => env('APP_HOST', null)."question"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "产品介绍",
+                        "url"  => env('APP_HOST', null)."goods"
+                    ],
+                    [
+                        "type" => "view",
+                        "name" => "小游戏",
+                        "url"  => env('APP_HOST', null)."games"
+                    ],
+                ],
             ],
         ];
         $this->menu->add($buttons);
@@ -40,42 +101,6 @@ class MenuController extends Controller
     }
 
 
-
-    public function addmenupartner($tag_id)    //合伙人 菜单
-    {
-        $matchRule = [
-            "tag_id"=>$tag_id
-        ];
-        $buttons = [
-            [
-                "type" => "view",
-                "name" => "提交订单",
-                "url"  => "http://fnjr.chonghui.net.cn/loan1"
-            ],
-            [
-                "type" => "view",
-                "name" => "订单中心",
-                "url"  => "http://fnjr.chonghui.net.cn/order"
-            ],
-            [
-                "name" => "产品帮助",
-                "sub_button" => [
-                    [
-                        "type" => "view",
-                        "name" => "产品",
-                        "url"  => "http://fnjr.chonghui.net.cn/goods"
-                    ],
-                    [
-                        "type" => "view",
-                        "name" => "帮助",
-                        "url"  => "http://fnjr.chonghui.net.cn/help"
-                    ],
-                ],
-            ],
-        ];
-        $this->menu->add($buttons, $matchRule);
-        echo '合伙人';
-    }
     public function testmenu($userId)
     {
         return $this->menu->test($userId);

@@ -15,7 +15,16 @@ use function var_dump;
 
 class LoanController extends Controller
 {
-
+    public function test2()
+    {
+        $buttons=
+        [
+            "type" => "view",
+            "name" => "签约产品",
+            "url"  => env('APP_HOST', null)."goods"
+        ];
+        dd($buttons);
+    }
     public function edit2(Request $request)
     {
         $teshu = $request->session()->get('teshu');
