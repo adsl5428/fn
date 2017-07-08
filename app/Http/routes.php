@@ -82,29 +82,17 @@ Route::get('/back', 'UsersController@back');
 
 Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
 
-    Route::get('/login', 'UsersController@login');
-    Route::get('/users/mail', 'UsersController@mail');
-    Route::any('/users/register', 'UsersController@register');
+    Route::group(['prefix' => 'permission'], function () {
+        Route::get('/','PermissionController@index');
+        Route::post('/','PermissionController@store');
+        Route::get('/create','PermissionController@create');
+        Route::get('/destroy/{id}','PermissionController@destroy');
+    });
 
-    Route::get('/addstaff', 'UsersController@addstaff');
-    Route::get('/addpartner', 'UsersController@addpartner');
-    Route::post('/staffregister', 'UsersController@staffregister');
-    Route::post('/partnerregister', 'UsersController@partnerregister');
 
 });
 Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
 //Route::group(['middleware' => ['web', 'wechat.oauth','partn']], function () {
-
-    Route::any('/loan1/{id?}', 'LoanController@loan1');
-    Route::any('/loan3', 'LoanController@loan3');
-    Route::get('/loan2', 'LoanController@loan2');
-    Route::get('/loan22', 'LoanController@loan22');
-    Route::post('/loan2', 'OrderController@create');
-
-    Route::get('/edit1/{id?}', 'LoanController@edit1');
-    Route::post('/edit1', 'OrderController@update');
-    Route::get('/edit2', 'LoanController@edit2');
-
 
 });
 
