@@ -48,12 +48,10 @@ Route::get('/gettel','UsersController@gettel');
 Route::get('/sms','SmsController@sendSms');
 
 
-Route::get('/menu','MenuController@menu');
-Route::get('/menu/list','MenuController@menulist');
-Route::get('/delmenu','MenuController@delmenu');
-Route::get('/addmenu/{id}','MenuController@addmenu');
-Route::get('/testmenu/{id}','MenuController@testmenu');
-Route::get('/addmenupartner/{id}','MenuController@addmenupartner');     //合伙人 标签 目录
+Route::get('/menu/create','MenuController@create');
+Route::get('/menu','MenuController@index');
+Route::get('/menu/del','MenuController@del');
+
 
 
 Route::get('/getgroup', 'GroupController@getgroup');
@@ -82,14 +80,8 @@ Route::get('/back', 'UsersController@back');
 
 Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
 
-    Route::group(['prefix' => 'permission'], function () {
-        Route::get('/','PermissionController@index');
-        Route::post('/','PermissionController@store');
-        Route::get('/create','PermissionController@create');
-        Route::get('/destroy/{id}','PermissionController@destroy');
-    });
-
-
+    Route::resource('permission','PermissionController');
+    Route::resource('role','RoleController');
 });
 Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
 //Route::group(['middleware' => ['web', 'wechat.oauth','partn']], function () {
@@ -111,19 +103,3 @@ Route::group(['middleware' => ['web']], function () {
 Route::any('/wechat', 'WechatController@serve');
 
 
-
-
-//Route::group(['prefix'=>'admin','namespace'=>'Admin'], function () {
-//    Route::get('index', 'IndexController@index');
-//    Route::get('info', 'IndexController@info');
-//    Route::get('quit', 'LoginController@quit');
-//    Route::any('pass', 'IndexController@pass');
-//
-//    Route::post('cate/changeorder', 'CategoryController@changeOrder');
-//    Route::resource('category', 'CategoryController');
-//
-//    Route::resource('article', 'ArticleController');
-//
-//    Route::any('upload', 'CommonController@upload');
-//
-//});

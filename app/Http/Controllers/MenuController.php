@@ -16,12 +16,12 @@ class MenuController extends Controller
         $this->menu = $app->menu;
     }
 
-    public function menulist()
+    public function index()
     {
         $menus = $this->menu->all();
         dd($menus);
     }
-    public function menu()
+    public function create()
     {
         $buttons = [
             [
@@ -97,15 +97,11 @@ class MenuController extends Controller
             ],
         ];
         $this->menu->add($buttons);
-        echo 'done';
+        echo '全部菜单创建成功';
     }
 
 
-    public function testmenu($userId)
-    {
-        return $this->menu->test($userId);
-    }
-    public function delmenu()
+    public function del()
     {
         $this->menu->destroy();
         return 'destroy done';

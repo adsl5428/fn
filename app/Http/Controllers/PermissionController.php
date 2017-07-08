@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Bican\Roles\Models\Permission;
+use function compact;
 use function dd;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use const null;
 use function redirect;
 
 class PermissionController extends Controller
@@ -42,7 +44,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
 //        dd($request->except('_token')->toArray());
-        $collection = collect($request->except('_token'));
+        $collection = collect($request->all());
 //        dd($collection->toArray());
         Permission::create($collection->toArray());
         return redirect('/permission');
@@ -56,8 +58,7 @@ class PermissionController extends Controller
      */
     public function show($id)
     {
-        $permission = Permission::firstOrFail ($id);
-        dd($permission);
+
     }
 
     /**
@@ -68,7 +69,8 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $permission = Permission::findorfail($id);
+        return view('permission.edit',compact('permission'));
     }
 
     /**
@@ -80,7 +82,9 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $permission = Permission::findorfail($id);
+        $permission ->update($request->all());
+        return redirect('/permission');
     }
 
     /**
@@ -89,10 +93,25 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-//        Permission::destroy($id);
-        return redirect()->action('PermissionController@index');
+        $permisson = Permission::destroy($request->get('id'));
+        if ($permisson==0)
+        {
+            $data = [
+            'status' => 0,
+            'msg' => '删除失败，请稍候再试。',
+            ];
+        }
+        else
+        {
+            $data = [
+                'status' => 1,
+                'msg' => '删除成功',
+            ];
+        }
+        return $data;
+//        return redirect()->action('PermissionController@index');
 //        return redirect()->back();
 
     }

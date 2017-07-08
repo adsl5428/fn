@@ -14,13 +14,15 @@
         <div class="weui_cell">
             <div class="weui_cell_hd"><label class="weui_label">名字</label></div>
             <div class="weui_cell_bd weui_cell_primary">
-                <input id="nameid" name="name" class="weui_input" placeholder="请输入名字"/>
+                <input id="nameid" name="name" class="weui_input" placeholder="填写权限名字"
+                       />
             </div>
         </div>
         <div class="weui_cell">
             <div class="weui_cell_hd"><label class="weui_label">标识</label></div>
             <div class="weui_cell_bd weui_cell_primary">
-                <input id="slugid" name="slug" class="weui_input" placeholder="请输入标识"/>
+                <input id="slugid" name="slug" class="weui_input" placeholder="填写权限标识"
+                       />
             </div>
         </div>
     </div>
@@ -29,7 +31,8 @@
         <div class="weui_cells">
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input id="descriptionid" name="description" class="weui_input" placeholder="请输入描述,备注" type="text">
+                    <input id="descriptionid" name="description" class="weui_input" placeholder="对该权限的描述" type="text"
+                           >
                 </div>
             </div>
         </div>
