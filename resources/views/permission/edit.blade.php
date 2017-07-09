@@ -1,11 +1,11 @@
 @extends('master')
-@section('title','编辑权限')
+@section('title','权限管理')
 @section('content')
     <script type="text/javascript" src="{{asset('js/jquery-1.12.4.min.js')}}"></script>
     <script src="{{asset('js/zepto.min.js')}}"></script>
     <div class="hd">
         <h2 class="page_title">
-            编辑权限
+            权限编辑
         </h2>
     </div>
     <form method="POST" action="{{url('/permission',$permission->id)}}">

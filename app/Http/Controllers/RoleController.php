@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Model\User;
+use Bican\Roles\Models\Permission;
+use Bican\Roles\Models\Role;
+use function count;
+use function dd;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use function var_dump;
 use function view;
 
 class RoleController extends Controller
@@ -16,7 +22,17 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('role.index');
+//        $Role = Role::create([
+//            'name' => 'Admin',
+//            'slug' => 'admin',
+//            'description' => '', // optional
+//            'level' => 1, // optional, set to 1 by default
+//        ]);
+//
+
+//        return 'done';
+        $roles = Role::latest()->get(['id','name','level','slug']);
+        return view('role.index',compact('roles'));
     }
 
     /**
@@ -26,7 +42,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        $permissions = Permission::all(['id','name']);
+        return view('role.create',compact('permissions'));
     }
 
     /**
@@ -37,7 +54,16 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request->all());
+
+        $collection = collect($request->only(['name','slug','level','description']));
+        $role = Role::create($collection->toArray());
+
+        $permission = collect($request->except(['name','slug','level','description','_token']));
+//        dd($permission->toArray());
+        $role->attachPermission($permission->toArray());
+
+        return redirect('/role');
     }
 
     /**
@@ -59,7 +85,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::findorfail($id);
+        $permissions = Permission::all(['id','name']);
+        return view('role.edit',compact('role','permissions'));
     }
 
     /**
@@ -71,7 +99,15 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+//        dd($request->all());
+        $role = Role::findorfail($id);
+        $role ->update($request->only(['name','slug','level','description']));
+        $role->detachAllPermissions(); // 删除全部
+
+        $permission = collect($request->except(['name','slug','level','description','_token','_method']));
+//        dd($permission->toArray());
+        $role->attachPermission($permission->toArray());
+        return redirect('/role');
     }
 
     /**
@@ -82,6 +118,21 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::destroy($id);
+        if ($role==0)
+        {
+            $data = [
+                'status' => 0,
+                'msg' => '删除失败，请稍候再试。',
+            ];
+        }
+        else
+        {
+            $data = [
+                'status' => 1,
+                'msg' => '删除成功',
+            ];
+        }
+        return $data;
     }
 }

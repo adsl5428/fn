@@ -21,7 +21,7 @@ class PermissionController extends Controller
     public function index()
     {
         // id 名称  标识  说明  模型  创建时间  更行时间
-        $permissions = Permission::latest()->get();
+        $permissions = Permission::latest()->get(['id','name','slug']);
         return view('permission.index',compact('permissions'));
     }
 
@@ -93,9 +93,10 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $permisson = Permission::destroy($request->get('id'));
+        $permisson = Permission::destroy($id);
+
         if ($permisson==0)
         {
             $data = [

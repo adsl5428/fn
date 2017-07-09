@@ -1,11 +1,11 @@
 @extends('master')
-@section('title','权限')
+@section('title','权限管理')
 @section('content')
     <script type="text/javascript" src="{{asset('js/jquery-1.12.4.min.js')}}"></script>
     <script src="{{asset('js/zepto.min.js')}}"></script>
     <div class="page_hd">
         <h1 class="page_title">
-            权限
+            权限列表
         </h1>
     </div>
     <div class="weui_cell_ft">
@@ -20,49 +20,47 @@
         @foreach($permissions as $permission)
         <tr id="row{{$permission->id}}"><td>{{$permission->slug}}</td><td>{{$permission->name }}</td>
             <td><a href="{{url('permission',[$permission->id,'edit'])}}">改</a></td>
-            <td><a onclick="del(this,'{{$permission->id}}')" href="javascript:;"   >删</a></td></tr>
+            <td><a onclick="del('{{$permission->id}}')" href="javascript:;" >删</a></td></tr>
         @endforeach
         </tbody>
     </table>
 @endsection
 @section('js')
     {{--<script type='text/javascript'>--}}
-    function deleteRow(obj){
-    var index=obj.parentNode.rowIndex;
-    {{--var table = document.getElementById("table");--}}
-    var table = $('#table')[0];
-    table.deleteRow(index);
-    }
-    function del(obj,id) {
-    $.showLoading();
-    t = setTimeout(function() {
-    $.hideLoading();$.toptips("服务无响应，请稍候再试 ");
-    }, 10000);
-        $.ajax(
-            {
-                type:"post" ,
-                dataType: "json",
-                data:
+        function del(id) {
+            $.confirm("您确定要删除吗?", "确认删除?", function() {
+                $.showLoading();
+                t = setTimeout(function() {
+                    $.hideLoading();$.toptips("服务无响应，请稍候再试 ");
+                }, 10000);
+                $.ajax(
                     {
-                        '_method': "DELETE",
-                        'id':id,
-                        '_token':"{{csrf_token()}}"
-                    },
-                url: "permission/destroy",
-                success:function(data){
-                    clearTimeout(t);
-                    $.hideLoading();
-                    if(data.status == 0)
-                    {
-                        $.toptips(data.msg);
-                    }
-                    else
-                    {
-                        $.toptips(data.msg,'ok')
-                        $("#row"+id).remove();
+                        type:"post" ,
+                        dataType: "json",
+                        data:
+                            {
+                                '_method': "DELETE",
+                                '_token':"{{csrf_token()}}"
+                            },
+                        url: "permission/"+id,
+                        success:function(data){
+                            clearTimeout(t);
+                            $.hideLoading();
+                            if(data.status == 0)
+                            {
+                                $.toptips(data.msg);
+                            }
+                            else
+                            {
+                                $.toptips(data.msg,'ok')
+                                $("#row"+id).remove();
 
-                     }
-                }
+                            }
+                        }
+                    });
+            }, function() {
+
             });
-    }
+
+        }
 @endsection
