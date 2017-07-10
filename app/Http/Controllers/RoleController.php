@@ -29,8 +29,9 @@ class RoleController extends Controller
 //            'level' => 1, // optional, set to 1 by default
 //        ]);
 //
-
 //        return 'done';
+
+
         $roles = Role::latest()->get(['id','name','level','slug']);
         return view('role.index',compact('roles'));
     }
@@ -87,7 +88,8 @@ class RoleController extends Controller
     {
         $role = Role::findorfail($id);
         $permissions = Permission::all(['id','name']);
-        return view('role.edit',compact('role','permissions'));
+        $role_permissions = Permission::with('roles')->get();
+        return view('role.edit',compact('role','permissions','role_permissions'));
     }
 
     /**

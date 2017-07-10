@@ -82,6 +82,7 @@ Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
 
     Route::resource('permission','PermissionController');
     Route::resource('role','RoleController');
+    Route::resource('user','UserController');
 });
 Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
 //Route::group(['middleware' => ['web', 'wechat.oauth','partn']], function () {

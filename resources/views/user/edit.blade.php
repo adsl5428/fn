@@ -48,15 +48,13 @@
 
         <div class="weui_cells_title">角色权限</div>
         <div class="weui_cells weui_cells_checkbox">
-            @foreach($role_permissions as $role_permission)
+
             @for($i = count($permissions)-1; $i>=0 ; $i--)
                 <div class="weui-flex">
                     <div class="weui-flex-item">
                         <label class="weui_cell weui_check_label" for="s{{$permissions[$i]->id}}">
                             <div class="weui_cell_hd">
-                                <input value="{{$permissions[$i]->id}}"
-                                       {{--@if($permissions[$i]->id == $role_permission->id) checked="checked" @endif--}}
-                                       type="checkbox" name="checkbox{{$permissions[$i]->id}}" class="weui_check" id="s{{$permissions[$i]->id}}">
+                                <input value="{{$permissions[$i]->id}}" type="checkbox" name="checkbox{{$permissions[$i]->id}}" class="weui_check" id="s{{$permissions[$i]->id}}">
                                 <i class="weui_icon_checked"></i>
                             </div>
                             <div class="weui_cell_bd weui_cell_primary">
@@ -70,9 +68,7 @@
                     <div class="weui-flex-item">
                         <label class="weui_cell weui_check_label" for="s{{$permissions[$i]->id}}">
                             <div class="weui_cell_hd">
-                                <input value="{{$permissions[$i]->id}}"
-                                       {{--@if($permissions[$i]->id == $role_permission->id) checked="checked" @endif--}}
-                                       type="checkbox" name="checkbox{{$permissions[$i]->id}}" class="weui_check" id="s{{$permissions[$i]->id}}">
+                                <input value="{{$permissions[$i]->id}}" type="checkbox" name="checkbox{{$permissions[$i]->id}}" class="weui_check" id="s{{$permissions[$i]->id}}">
                                 <i class="weui_icon_checked"></i>
                             </div>
                             <div class="weui_cell_bd weui_cell_primary">
@@ -82,7 +78,6 @@
                     </div>
                 </div>
             @endfor
-            @endforeach
         </div>
 
         <div class="weui_btn_area">
