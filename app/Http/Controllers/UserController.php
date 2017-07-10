@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Model\User;
+use App\Http\Model\role_user;
+use Bican\Roles\Models\Role;
+use function dd;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,9 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-
         $users = User::latest()->get(['id','name','tel','belong_id']);
-
         return view('user.index',compact('users'));
     }
 
@@ -29,7 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $roles = Role::all(['id','name']);
+        return view('user.create',compact('roles'));
     }
 
     /**
@@ -40,8 +42,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+//        $collection = collect($request->only(['name','slug','level','description']));
+//        $role = Role::create($collection->toArray());
+
+//        $permission = collect($request->except(['name','slug','level','description','_token']));
+//        $role->attachPermission(
+//            $permission->toArray()
+//        );
+//        dd($request->all());
+
         $user = User::create($request->all());
-        return redirect('/user');
+        $role = collect($request->except(['name','idcard','bank','kaihuhang','bankcard','tel','_token']));
+        $user->attachRole($role->toArray());
+            return redirect('/user');
     }
 
     /**
@@ -86,6 +99,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        Role_user::where('user_id', $id)->delete();
         $user = User::destroy($id);
         if ($user==0)
         {

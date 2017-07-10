@@ -57,45 +57,42 @@
                     <input id="telid" name="tel" type="number" class="weui_input" placeholder="电话号码" />
                 </div>
             </div>
-
-
+        </div>
+        {{--<div class="weui_cells_title">用户角色</div>--}}
+        <div class="weui_cells_title">设定角色</div>
+        <div class="weui_cells weui_cells_checkbox">
+            @for($i = count($roles)-1; $i>=0 ; $i--)
+                <div class="weui-flex">
+                    <div class="weui-flex-item">
+                        <label class="weui_cell weui_check_label" for="s{{$roles[$i]->id}}">
+                            <div class="weui_cell_hd">
+                                <input value="{{$roles[$i]->id}}" type="checkbox" name="checkbox{{$roles[$i]->id}}" class="weui_check" id="s{{$roles[$i]->id}}">
+                                <i class="weui_icon_checked"></i>
+                            </div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>{{$roles[$i--]->name}}</p>
+                            </div>
+                        </label>
+                    </div>
+                    @if($i<0)
+                        @break
+                    @endif
+                    <div class="weui-flex-item">
+                        <label class="weui_cell weui_check_label" for="s{{$roles[$i]->id}}">
+                            <div class="weui_cell_hd">
+                                <input value="{{$roles[$i]->id}}" type="checkbox" name="checkbox{{$roles[$i]->id}}" class="weui_check" id="s{{$roles[$i]->id}}">
+                                <i class="weui_icon_checked"></i>
+                            </div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <p>{{$roles[$i]->name}}</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            @endfor
         </div>
 
-        <div class="weui_cells_title">用户权限</div>
-        {{--<div class="weui_cells weui_cells_checkbox">--}}
-            {{--@for($i = count($permissions)-1; $i>=0 ; $i--)--}}
-                {{--<div class="weui-flex">--}}
-                    {{--<div class="weui-flex-item">--}}
-                        {{--<label class="weui_cell weui_check_label" for="s{{$permissions[$i]->id}}">--}}
-                            {{--<div class="weui_cell_hd">--}}
-                                {{--<input value="{{$permissions[$i]->id}}" type="checkbox" name="checkbox{{$permissions[$i]->id}}" class="weui_check" id="s{{$permissions[$i]->id}}">--}}
-                                {{--<i class="weui_icon_checked"></i>--}}
-                            {{--</div>--}}
-                            {{--<div class="weui_cell_bd weui_cell_primary">--}}
-                                {{--<p>{{$permissions[$i--]->name}}</p>--}}
-                            {{--</div>--}}
-                        {{--</label>--}}
-                    {{--</div>--}}
-                    {{--@if($i<0)--}}
-                        {{--@break--}}
-                    {{--@endif--}}
-                    {{--<div class="weui-flex-item">--}}
-                        {{--<label class="weui_cell weui_check_label" for="s{{$permissions[$i]->id}}">--}}
-                            {{--<div class="weui_cell_hd">--}}
-                                {{--<input value="{{$permissions[$i]->id}}" type="checkbox" name="checkbox{{$permissions[$i]->id}}" class="weui_check" id="s{{$permissions[$i]->id}}">--}}
-                                {{--<i class="weui_icon_checked"></i>--}}
-                            {{--</div>--}}
-                            {{--<div class="weui_cell_bd weui_cell_primary">--}}
-                                {{--<p>{{$permissions[$i]->name}}</p>--}}
-                            {{--</div>--}}
-                        {{--</label>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--@endfor--}}
-        {{--</div>--}}
-
-
-
+        <div class="weui_cells_title">如有特殊权限需求,请添加角色后修改</div>
         <div class="weui_btn_area">
             {{--<a id="btnlogin" onclick="create()" class="weui_btn weui_btn_primary" href="javascript:">创建</a>--}}
             <input type="submit" class="weui_btn weui_btn_primary" value="创建">

@@ -14,7 +14,7 @@
     </div>
     <table class="weui-table weui-border-tb"  id="table">
         <thead>
-        <tr><th>名字</th><th>电话</th><th>签约人</th><th>操</th><th>作</th></tr>
+        <tr><th>名字</th><th>电话</th><th>归属</th><th>操</th><th>作</th></tr>
         </thead>
         <tbody>
         @foreach($users as $user)

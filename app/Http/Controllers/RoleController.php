@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Model\Permission_role;
 use App\Http\Model\User;
 use Bican\Roles\Models\Permission;
 use Bican\Roles\Models\Role;
@@ -61,7 +62,6 @@ class RoleController extends Controller
         $role = Role::create($collection->toArray());
 
         $permission = collect($request->except(['name','slug','level','description','_token']));
-//        dd($permission->toArray());
         $role->attachPermission($permission->toArray());
 
         return redirect('/role');
@@ -88,7 +88,8 @@ class RoleController extends Controller
     {
         $role = Role::findorfail($id);
         $permissions = Permission::all(['id','name']);
-        $role_permissions = Permission::with('roles')->get();
+        $role_permissions = Permission_role::where('role_id',$id)->get(['permission_id']);
+//        dd($role_permissions[0]->permission_id);
         return view('role.edit',compact('role','permissions','role_permissions'));
     }
 
