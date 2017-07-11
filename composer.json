@@ -10,7 +10,8 @@
         "overtrue/laravel-wechat": "~3.0",
         "iscms/alisms-for-laravel": "^0.0.3",
         "encore/laravel-admin": "1.2.*",
-        "bican/roles": "2.1.*"
+        "bican/roles": "2.1.*",
+        "laravelcollective/html": "5.2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

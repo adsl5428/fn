@@ -42,19 +42,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-//        $collection = collect($request->only(['name','slug','level','description']));
-//        $role = Role::create($collection->toArray());
-
-//        $permission = collect($request->except(['name','slug','level','description','_token']));
-//        $role->attachPermission(
-//            $permission->toArray()
-//        );
-//        dd($request->all());
+        $belong_id = User::where('name',$request->get('belong_name'))->get(['belong_id']);
+        if ($belong_id->isEmpty())
+            return back();
 
         $user = User::create($request->all());
         $role = collect($request->except(['name','idcard','bank','kaihuhang','bankcard','tel','_token']));
         $user->attachRole($role->toArray());
-            return redirect('/user');
+        return redirect('/user');
     }
 
     /**

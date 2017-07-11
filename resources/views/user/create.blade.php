@@ -17,17 +17,16 @@
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">名字</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input id="nameid" name="name" class="weui_input" placeholder="填写用户名字" />
+                    <input id="nameid" name="name" value="" class="weui_input" placeholder="填写用户名字" />
                 </div>
             </div>
 
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">身份证</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input id="idcardid" name="idcard" type="number" class="weui_input" placeholder="身份证号码" />
+                    <input id="idcardid" name="idcard" value="" type="number" class="weui_input" placeholder="身份证号码" />
                 </div>
             </div>
-
 
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">持卡银行</label></div>
@@ -50,13 +49,27 @@
                 </div>
             </div>
 
-
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">电话</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
                     <input id="telid" name="tel" type="number" class="weui_input" placeholder="电话号码" />
                 </div>
             </div>
+
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">归属</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input id="belong_nameid" name="belong_name"  class="weui_input" placeholder="上级或签约人（必须员工）" />
+                </div>
+            </div>
+
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">邀请码</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input id="codeid" name="code"  class="weui_input" placeholder="邀请码" />
+                </div>
+            </div>
+
         </div>
         {{--<div class="weui_cells_title">用户角色</div>--}}
         <div class="weui_cells_title">设定角色</div>
@@ -92,13 +105,18 @@
             @endfor
         </div>
 
-        <div class="weui_cells_title">如有特殊权限需求,请添加角色后修改</div>
+        <div class="weui_cells_title">如有特殊权限需求,请创建角色后修改</div>
         <div class="weui_btn_area">
             {{--<a id="btnlogin" onclick="create()" class="weui_btn weui_btn_primary" href="javascript:">创建</a>--}}
             <input type="submit" class="weui_btn weui_btn_primary" value="创建">
         </div>
     </form>
 
+    {{--@if($errors->any())--}}
+        {{--@foreach($errors->all() as $error)--}}
+            {{--{{$error}}--}}
+        {{--@endforeach--}}
+    {{--@endif--}}
 @endsection
 @section('js')
 
