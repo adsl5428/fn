@@ -9,7 +9,7 @@
         </h4>
     </div>
 
-    <form method="POST" action="{{url('/user')}}">
+    <form method="POST" action="{{url('/register')}}">
         {{csrf_field()}}
         <div class="weui_cells_title">基本</div>
         <div class="weui_cells weui_cells_form">
@@ -19,6 +19,11 @@
                 <div class="weui_cell_bd weui_cell_primary">
                     <input id="nameid" name="name" value="" class="weui_input" placeholder="填写用户名字" />
                 </div>
+                @if ($errors->has('name'))
+                    <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                @endif
             </div>
 
             <div class="weui_cell">

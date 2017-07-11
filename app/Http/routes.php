@@ -11,7 +11,7 @@
 |
 */
 
-use App\Http\Controllers\Userscontroller;
+//use App\Http\Controllers\Userscontroller;
 
 
 Route::group(['prefix' => 'myadmin','namespace' => 'Myadmin'], function () {
@@ -22,10 +22,19 @@ Route::group(['prefix' => 'myadmin','namespace' => 'Myadmin'], function () {
 
 Route::get('demo/{id}','SmsController@demo');    //创建标签
 
-Route::get('/welcome', function () {
-    return url('uploads','123456');
-   return view('welcome');
+Route::get('/logout', function () {
+    return Auth::logout();
 });
+Route::get('/log', function () {
+
+    return Auth::loginUsingId(5);
+});
+Route::get('/check', function () {
+
+    dd(Auth::check()) ;
+});
+
+
 Route::get('moban','SmsController@test');    //创建标签
 
 Route::get('tag/create/{name}','TagController@create');    //创建标签
@@ -104,3 +113,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::any('/wechat', 'WechatController@serve');
 
 
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->get(['id','name','tel','belong_id']);
+        $users = User::latest()->get(['id','name','tel','belong_name']);
         return view('user.index',compact('users'));
     }
 
